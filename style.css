@@ -1,3 +1,14 @@
-.container {
-    display:grid;
+
+
+.calc-solar {
+   background-color : black;
+   height: 25px;
+   width: 20px;
+   float: left;
+
+}
+.calc-button {
+    height: 20px;
+    width: 35px;
+    
 }

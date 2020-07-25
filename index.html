@@ -4,18 +4,41 @@
         <link rel="stylesheet" type="text/css" href="style.css"/>
     </head>
 <body>
-    <form name="calculator">
+    <div class="main">
+        <form name="form">
+            <input class="textview">
+        </form>
         <table>
             <tr>
-                <td><input type="text" name="display" id="display"></td>
+                <td><input class="calc-button" type="button" value="7"></input></td>
+                <td><input class="calc-button" type="button" value="8"></input></td>
+                <td><input class="calc-button" type="button" value="9"></input></td>
+                <td><input class="calc-button" type="button" value="/"></input></td>
+
             </tr>
             <tr>
-                <td><input type="button" name="one" value="1"></td>
-                <td><input type="button" name="two" value="2"></td>
-                <td><input type="button" name="three" value="3"></td>
+                <td><input class="calc-button" type="button" value="4"></input></td>
+                <td><input class="calc-button" type="button" value="5"></input></td>
+                <td><input class="calc-button" type="button" value="6"></input></td>
+                <td><input class="calc-button" type="button" value="x"></input></td>
+
+            </tr>
+            <tr>
+                <td><input class="calc-button" type="button" value="1"></input></td>
+                <td><input class="calc-button" type="button" value="2"></input></td>
+                <td><input class="calc-button" type="button" value="3"></input></td>
+                <td><input class="calc-button" type="button" value="-"></input></td>
+
+            </tr>
+            <tr>
+                <td><input class="calc-button" type="button" value="0"></input></td>
+                <td><input class="calc-button" type="button" value="."></input></td>
+                <td><input class="calc-button" type="button" value="+"></input></td>
+                <td><input class="calc-button" type="button" value="="></input></td>
+
             </tr>
         </table>
-    </form>
+    </div>
     <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
