@@ -1,4 +1,11 @@
-console.log(operate(1,0,'/'));
+//console.log(operate(1,0,'/'));
+
+const btn = document.querySelectorAll('.calc-button, .calc-r1');
+btn.forEach((button) => {
+    button.addEventListener('click', () => {
+        console.log(button.value);
+    });
+});
 
 
 
