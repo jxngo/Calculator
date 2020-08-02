@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Calculator</title>
+        <link rel="icon" href="icon.ico"/>
         <link rel="stylesheet" type="text/css" href="style.css"/>
     </head>
 <body>
@@ -8,46 +10,41 @@
     <div class="main">
         <div id="display" class="display" value="0">0</div>
         <div class="button-group">
-        <table>
             <tr>
-                <td><input id="btn-clear" class="calc-r1" type="button" value="AC"></input></td>
-                <td><input id="btn-sign" class="calc-r1" type="button" value="+/-"></input></td>
-                <td><input id="btn-percent" class="calc-r1" type="button" value="%"></input></td>
-                <td><input id="btn-divide" class="calc-button" type="button" value="/"></input></td>
+                <td><button id="btn-clear" class="calc-etc" type="button" value="AC">AC</button></td>
+                <td><button id="btn-sign" class="calc-etc" type="button" value="+/-">+/-</button></td>
+                <td><button id="btn-percent" class="calc-etc" type="button" value="%">%</button></td>
+                <td><button id="btn-divide" class="calc-operator" type="button" value="÷">÷</button></td>
                 
             </tr>
             <tr>
-                <td><input id="btn-7" class="calc-button" type="button" value="7"></input></td>
-                <td><input id="btn-8" class="calc-button" type="button" value="8"></input></td>
-                <td><input id="btn-9" class="calc-button" type="button" value="9"></input></td>
-                <td><input id="btn-multiply" class="calc-button" type="button" value="x"></input></td>
-                
-
-            </tr>
-            <tr>
-                <td><input id="btn-4" class="calc-button" type="button" value="4"></input></td>
-                <td><input id="btn-5" class="calc-button" type="button" value="5"></input></td>
-                <td><input id="btn-6" class="calc-button" type="button" value="6"></input></td>
-                <td><input id="btn-minus" class="calc-button" type="button" value="-"></input></td>
+                <td><button id="btn-7" class="calc-button" type="button" value="7">7</button></td>
+                <td><button id="btn-8" class="calc-button" type="button" value="8">8</button></td>
+                <td><button id="btn-9" class="calc-button" type="button" value="9">9</button></td>
+                <td><button id="btn-multiply" class="calc-operator" type="button" value="x">×</button></td>
                 
 
             </tr>
             <tr>
-                <td><input id="btn-1" class="calc-button" type="button" value="1"></input></td>
-                <td><input id="btn-2" class="calc-button" type="button" value="2"></input></td>
-                <td><input id="btn-3" class="calc-button" type="button" value="3"></input></td>
-                <td><input id="btn-add" class="calc-button" type="button" value="+"></input></td>
+                <td><button id="btn-4" class="calc-button" type="button" value="4">4</button></td>
+                <td><button id="btn-5" class="calc-button" type="button" value="5">5</button></td>
+                <td><button id="btn-6" class="calc-button" type="button" value="6">6</button></td>
+                <td><button id="btn-minus" class="calc-operator" type="button" value="-">-</button></td>
                 
 
             </tr>
             <tr>
-                <td><input id="btn-0" class="calc-button" type="button" value="0"></input></td>
-                <td><input id="btn-float" class="calc-button" type="button" value="."></input></td>
-                <td><input id="btn-equal" class="calc-button" type="button" value="="></input></td>
+                <td><button id="btn-1" class="calc-button" type="button" value="1">1</button></td>
+                <td><button id="btn-2" class="calc-button" type="button" value="2">2</button></td>
+                <td><button id="btn-3" class="calc-button" type="button" value="3">3</button></td>
+                <td><button id="btn-add" class="calc-operator" type="button" value="+">+</button></td>
+                
 
             </tr>
-            
-        </table>
+                <td><button id="btn-0" class="calc-button" type="button" value="0">0</button></td>
+                <td><button id="btn-float" class="calc-button" type="button" value=".">.</button></td>
+                <td><button id="btn-equal" class="calc-operator" type="button" value="=">=</button></td>
+            </tr>
     </div>
     </div>
 </div>
