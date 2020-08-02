@@ -1,10 +1,10 @@
 //console.log(operate(1,0,'/'));
-var op1 = null,op2 = null,operand = null;
+var op1 = null,op2 = null,operator = null;
 
-const btn = document.querySelectorAll('.calc-button, .calc-r1').forEach((button) => {
+const btn = document.querySelectorAll('.calc-button, .calc-etc, .calc-operator').forEach((button) => {
     button.addEventListener('click', () => {
         if (button.value === '÷' || button.value === 'x' || button.value === '-' || button.value === '+'){
-            operand = button.value;
+            operator = button.value;
             return;
         }
         if (button.value === '%' || button.value === '.') {
@@ -21,16 +21,16 @@ const btn = document.querySelectorAll('.calc-button, .calc-r1').forEach((button)
         }
 
         if (button.value === '='){
-            if(op1 === null || op2 === null || operand === null) {
-                if (op2 === null && operand !== null){
+            if(op1 === null || op2 === null || operator === null) {
+                if (op2 === null && operator !== null){
                     op2 = op1;
-                    operate(op1,op2,operand);
+                    operate(op1,op2,operator);
                 }
                 else
                 display(op1);
             }
             else
-                operate(op1,op2,operand);
+                operate(op1,op2,operator);
             return;
         }
         else {
@@ -49,7 +49,7 @@ function reset() {
     document.getElementById("display").innerHTML = 0;
     op1 = null;
     op2 = null;
-    operand = null;
+    operator = null;
 }
 function display (value) {
     document.getElementById("display").innerHTML = value;
