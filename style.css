@@ -7,14 +7,14 @@
 }
 .main {
     background-color: black;
-    width: 350px;
-    height: 400px;
+    width: 300px;
+    height: 500px;
     display:inline-block;
     margin-top: 150px;
     border-color: grey ;
     border-width: 2px;
     border-style: solid;
-    border-radius: 10px;
+    border-radius: 30px;
     
 }
 
@@ -22,40 +22,43 @@
     margin: 30px;
     padding: 10px;
     height: 30px;
-    width: 270px;
+    width: 240px;
     border-radius: 30px;
     border-style: solid  #e9e9e9;
     color:white;
     text-align: right;
-    font-size: 60px;
-        
+    font-size: 60px;   
 }
-
-.calc-button, .calc-r1{
-    height: 50px;
-    width: 70px;
+.button-group {
+    padding-left: 2px;
+    
+}
+.calc-button, .calc-etc, .calc-operator{
+    height: 60px;
+    width: 60px;
     font-size: 25px;
     margin-left: 4px;
-    border-radius: 100%;
+    margin-top: 10px;
+    border-radius: 30px;
+    border: none;
     cursor: pointer;
     outline: 0;
     color: white;
     background-color: #505050;
 }
 
-.calc-r1 {
+.calc-etc {
     color: black;
-    background-color: #D4D4D2;
-    
+    background-color: #D4D4D2; 
 }
 
-#btn-divide,#btn-multiply,#btn-minus,#btn-add {
+#btn-divide,#btn-multiply,#btn-minus,#btn-add,#btn-equal {
     background-color: #FF9500;
     color: white;
 }
 
-
-.button-group {
-    padding-left: 15px;
-    
+#btn-0 {
+    width: 130px;
+    text-align: left;
+    padding-left: 23px;
 }
