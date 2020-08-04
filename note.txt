@@ -1,10 +1,9 @@
 7/29/2020 12:48pm {
-    I need to change the width of btn-0
-    and store the value into a variable. 
-    *Postfix function to calculate
-    *Effect when pressing the number buttons
+    -changed btn-0 width
+    -can now store value into variable
+    *Postfix function to calculate*
+    *Effect when pressing the number buttons*
     *Orange buttons will be highlighted when clicked.*
-    -Must be separated from display event listenr
 }
 
 8/2/2020 10:57pm {
@@ -13,7 +12,7 @@
 
 8/4/2020 3:46pm {
     -Implemented Stack
-    -Kinda got the hang of implementing postfix evaluation but now need to
-    -create function for converting infix to postfix. And how to implement into the calculator
+    -Postfix evaluation function
+    *create function for converting infix to postfix. And how to implement into the calculator*
     https://gist.github.com/dineshrajpurohit/d14349fc48c6da937a04
 }
