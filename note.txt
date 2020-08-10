@@ -16,3 +16,17 @@
     *create function for converting infix to postfix. And how to implement into the calculator*
     https://gist.github.com/dineshrajpurohit/d14349fc48c6da937a04
 }
+
+8/8/2020 3:42pm {
+    -Can reset stack now in reset();
+    -Can now do complex expressions but only with single digits
+    *First I need to find a way to capture multi-digits in one variable
+    *then lastly convert inf
+}
+
+8/9/2020 12:02am {
+    -Can finally convert infix to postfix
+    -postfix evaluation on display now
+    *HOW TO CAPTURE MULTI DIGITS!!!!!!!!!!!!!
+    *Work on other interfaces.
+}

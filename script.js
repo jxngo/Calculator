@@ -66,10 +66,9 @@ const btn = document.querySelectorAll('.calc-button, .calc-etc, .calc-operator')
                     display(0);
             }
             else {
-                operate(op1,op2,operator);
                 var str = inStack.printStack();
-                // Reason why its "underflow" because the expression hasnt been converted to postfix yet
-                console.log(evalPostfix(str));
+                str = convertToPostfix(str);
+                display(evalPostfix(str));
             }
             return;
         }
@@ -78,10 +77,12 @@ const btn = document.querySelectorAll('.calc-button, .calc-etc, .calc-operator')
             if (op1 === null) {
                 op1 = button.value;
                 inStack.push(button.value);
+                
             }
             else {
                 op2 = button.value;
                 inStack.push(button.value);
+                
             }
         }
     });
@@ -93,7 +94,7 @@ function reset() {
     op1 = null;
     op2 = null;
     operator = null;
-    while(!inStack.isEmpty){
+    while(!inStack.isEmpty()){
         inStack.pop();
     }
 }
@@ -157,5 +158,45 @@ function evalPostfix(exp)
     return inStack.pop(); 
 } 
 function convertToPostfix (exp) {
+   var pFixString = "";
+   var opStack = new Stack();
 
+   var precedence = function(op){
+        switch(op){
+            case "x":
+            case "÷":
+                return 2;
+            case "+":
+            case "-":
+                return 1;
+            default:
+                return 0;
+        }
+
+    }
+
+    for (var i = 0; i < exp.length; i++){
+        
+        var c = exp.charAt(i);
+        if (!isNaN(parseInt(c)))
+            pFixString += c;
+        else {
+            if (opStack.isEmpty()){
+                opStack.push(c);
+            }
+            else {
+                while (!opStack.isEmpty() && (precedence(c) <= precedence(opStack.peek()))) {
+                    pFixString += opStack.pop();
+                }
+                opStack.push(c);
+            }
+        }
+        
+    }
+    while(!opStack.isEmpty()){
+        pFixString += opStack.pop();
+    }
+    console.log(pFixString);
+    return pFixString;
 }
+
