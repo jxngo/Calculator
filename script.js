@@ -29,12 +29,12 @@ class Stack {
         return str; 
     }
 }
-var op1 = null,op2 = null,operator = null;
+var op1 = null,op2 = null,operator = null, value = "";
 var inStack = new Stack();
 
 const btn = document.querySelectorAll('.calc-button, .calc-etc, .calc-operator').forEach((button) => {
     button.addEventListener('click', () => {
-        if (button.value === '÷' || button.value === 'x' || button.value === '-' || button.value === '+'){
+        if (button.value === '/' || button.value === 'x' || button.value === '-' || button.value === '+'){
             operator = button.value;
             inStack.push(operator);
             return;
@@ -57,7 +57,9 @@ const btn = document.querySelectorAll('.calc-button, .calc-etc, .calc-operator')
                 // if only op1 and op was entered
                 if (op2 === null && operator !== null){
                     op2 = op1;
-                    operate(op1,op2,operator); 
+                    inStack.push(op2);
+                    var str = (evalPostfix(convertToPostfix(inStack.printStack())));
+                    display(str);
                 }
                 // if only op1 was entered 
                 else if (op1 !== null )
@@ -66,22 +68,25 @@ const btn = document.querySelectorAll('.calc-button, .calc-etc, .calc-operator')
                     display(0);
             }
             else {
-                var str = inStack.printStack();
-                str = convertToPostfix(str);
-                display(evalPostfix(str));
+                display(evalPostfix(convertToPostfix(inStack.printStack())));
+                //var str = inStack.printStack();
+                //str = convertToPostfix(str);
+                //display(evalPostfix(str));
             }
             return;
         }
         else {
-            display(button.value);   
+            value += button.value;
+            console.log(value);
+            display(value);   
             if (op1 === null) {
                 op1 = button.value;
-                inStack.push(button.value);
+                inStack.push(op1);
                 
             }
             else {
                 op2 = button.value;
-                inStack.push(button.value);
+                inStack.push(op2);
                 
             }
         }
@@ -91,6 +96,7 @@ const btn = document.querySelectorAll('.calc-button, .calc-etc, .calc-operator')
 
 function reset() {
     document.getElementById("display").innerHTML = 0;
+    value = "";
     op1 = null;
     op2 = null;
     operator = null;
@@ -101,28 +107,7 @@ function reset() {
 function display (value) {
     document.getElementById("display").innerHTML = value;
 }
-function operate (num,num2,op){
-var value = 0;
-    switch(op){
-        case '+': 
-            value = (parseInt(num)+ parseInt(num2));
-            break;
-        case '-': 
-            value = (num-num2);
-            break;
-        case 'x':
-            value = (num*num2);
-            break;
-        case '÷': {
-            if (num2 === '0') 
-                value = ("Error");
-            else 
-                value = (num/num2);
-            break; 
-        }
-    }
-    display(value);
-}
+
 function evalPostfix(exp) 
 { 
     var inStack = new Stack(); 
@@ -144,7 +129,7 @@ function evalPostfix(exp)
                 inStack.push(val2 - val1); 
                 break; 
   
-            case '÷': 
+            case '/': 
                 inStack.push(val2 / val1); 
                 break; 
   
@@ -154,7 +139,6 @@ function evalPostfix(exp)
             } 
         } 
     } 
-  
     return inStack.pop(); 
 } 
 function convertToPostfix (exp) {
@@ -164,7 +148,7 @@ function convertToPostfix (exp) {
    var precedence = function(op){
         switch(op){
             case "x":
-            case "÷":
+            case "/":
                 return 2;
             case "+":
             case "-":
@@ -175,28 +159,23 @@ function convertToPostfix (exp) {
 
     }
 
-    for (var i = 0; i < exp.length; i++){
-        
+    for (var i = 0; i < exp.length; i++){  
         var c = exp.charAt(i);
-        if (!isNaN(parseInt(c)))
+        if (!isNaN(parseInt(c))) {
             pFixString += c;
-        else {
-            if (opStack.isEmpty()){
-                opStack.push(c);
-            }
-            else {
-                while (!opStack.isEmpty() && (precedence(c) <= precedence(opStack.peek()))) {
-                    pFixString += opStack.pop();
-                }
-                opStack.push(c);
-            }
         }
-        
+        else {
+            while (!opStack.isEmpty() && (precedence(c) <= precedence(opStack.peek()))) {
+                pFixString += opStack.pop();    
+            }
+                opStack.push(c);       
+        }
     }
-    while(!opStack.isEmpty()){
+        /* while(!opStack.isEmpty()){
+            pFixString += opStack.pop(); 
+        } */
+     while(!opStack.isEmpty()){
         pFixString += opStack.pop();
-    }
-    console.log(pFixString);
+    } 
     return pFixString;
-}
-
+};
