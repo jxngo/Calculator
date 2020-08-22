@@ -51,4 +51,16 @@
 8/21/2020 5:20am {
    - Starting to do multiple value. Not done yet
    - Also need to fix pemdas issue
+
+   1:50pm
+   - Finally got the multiple digits down!
+   - Can now solve big numbers but only one expression
+
+   * only issue is pemdas and op1/op2/op
+}
+8/22/2020 {
+    -Fixed pemdas and allow multiple expressions
+    *+/- can only work on initial number 
+    *% can only work on initial number
+    *how to round up 2 places decimal with float value and not have to display whole number with decimals?
 }

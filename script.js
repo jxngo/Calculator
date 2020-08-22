@@ -4,8 +4,8 @@ class Stack {
     }
 
     push(element) {
-        this.items.push(element);
-    }
+       this.items.push(element);
+   }
      
     pop() {
         if (this.items.length === 0)
@@ -29,120 +29,163 @@ class Stack {
         return str; 
     }
 }
-var op1 = null,op2 = null,operator = null, value = "";
-var inStack = new Stack();
+class Queue  {
+    constructor() {
+    this.elements = [];
+    }
+
+    enqueue(element){
+        this.elements.push(element);
+    }
+    dequeue(){
+        if (this.isEmpty())
+            return "Underflow";
+        return this.elements.shift();
+    }
+    front(){
+        if(this.isEmpty())
+            return "No elements in Queue";
+        return this.items[0];
+    }
+
+    isEmpty(){
+        return this.elements.length == 0;
+    }
+    printQueue(){
+        var str = "";
+        for(var i = 0; i < this.elements.length; i++) 
+        str += this.elements[i]; 
+            return str; 
+    }
+}
+
+var op1 = 0,op2 = 0,operator = 0, value = "";
+
+var inQ = new Queue();
+var postQ = new Queue();
 
 const btn = document.querySelectorAll('.calc-button, .calc-etc, .calc-operator').forEach((button) => {
     button.addEventListener('click', () => {
-        if (button.value === '/' || button.value === 'x' || button.value === '-' || button.value === '+'){
-            operator = button.value;
-            inStack.push(operator);
-            return;
-        }
-        if (button.value === '%' || button.value === '.') {
-            console.log("% .");
-            return;
-        }
-        if (button.value === '+/-'){
-            console.log("+/-");
-            return;
-        }
-        if (button.value === 'AC') {
-            reset();
-            return;
-        }
-        if (button.value === '='){
-            // if no number/op were entered but presses =
-            if(op1 === null || op2 === null || operator === null) {
-                // if only op1 and op was entered
-                if (op2 === null && operator !== null){
-                    op2 = op1;
-                    inStack.push(op2);
-                    var str = (evalPostfix(convertToPostfix(inStack.printStack())));
-                    display(str);
+        switch(button.value){
+            case "/":
+            case "x":
+            case "+":
+            case "-": {
+                if (inQ.isEmpty()){                 
+                inQ.enqueue(value);
+                value = "";
                 }
-                // if only op1 was entered 
-                else if (op1 !== null )
-                    display(op1);
-                else 
-                    display(0);
+                inQ.enqueue(button.value);
+                break;
             }
-            else {
-                display(evalPostfix(convertToPostfix(inStack.printStack())));
-                //var str = inStack.printStack();
-                //str = convertToPostfix(str);
-                //display(evalPostfix(str));
+            case "+/-":
+                value = pos_to_neg(parseInt(value));
+                display(value);
+                toString(value);
+                break;
+            case "%":
+                value = (parseFloat(value) / 100.0).toFixed(2);
+                display(value);
+                break;
+            case "AC": {
+                reset();
+                break;
             }
-            return;
+            case "=": {
+               //if (postQ.front() == "x" || postQ.front() == "/" || postQ.front() == "+" || postQ.front() == "-")
+               // }
+                inQ.enqueue(value);
+                value = "";
+                console.log(inQ.printQueue());
+                convertToPostfix();
+                postQ.printQueue();
+                evalPostfix();
+                break;
+            }
+            default: {
+                value += button.value;
+                display(value);
+                break;
+            }
         }
-        else {
-            value += button.value;
-            console.log(value);
-            display(value);   
-            if (op1 === null) {
-                op1 = button.value;
-                inStack.push(op1);
-                
-            }
-            else {
-                op2 = button.value;
-                inStack.push(op2);
-                
-            }
-        }
+    
     });
 });
 
+function pos_to_neg(num) {
+    return -Math.abs(num);
+}
 
-function reset() {
-    document.getElementById("display").innerHTML = 0;
-    value = "";
-    op1 = null;
-    op2 = null;
-    operator = null;
-    while(!inStack.isEmpty()){
-        inStack.pop();
+
+function resetQueue() {
+    while(!postQ.isEmpty() || !inQ.isEmpty()){
+        postQ.dequeue();
+        inQ.dequeue();
     }
+}
+function reset() {
+    document.getElementById("display").innerHTML = "0";
+    value = "";
+    op1 = 0;
+    op2 = 0;
+    operator = 0;
+
+    resetQueue();
+    
 }
 function display (value) {
     document.getElementById("display").innerHTML = value;
 }
 
-function evalPostfix(exp) 
-{ 
-    var inStack = new Stack(); 
-    for (var i = 0; i < exp.length; i++) { 
-        var c = exp[i]; 
+
+function evalPostfix() { 
+    var i = 0;
+    var newStack = new Stack(); 
+    var num = 0;
+    while (!postQ.isEmpty()) { 
+        var c = postQ.dequeue(); 
         if (!isNaN(c)) 
-            inStack.push(c - '0'); 
+            newStack.push(c - '0'); 
         else { 
-            var val1 = inStack.pop(); 
-            var val2 = inStack.pop(); 
+            var val1 = newStack.pop(); 
+            var val2 = newStack.pop(); 
             if (val1 == "Underflow" || val2 == "Underflow") 
                 return "Can't perform postfix evaluation"; 
             switch (c) { 
             case '+': 
-                inStack.push(val2 + val1); 
+                newStack.push(val2 + val1); 
                 break; 
   
             case '-': 
-                inStack.push(val2 - val1); 
+                newStack.push(val2 - val1); 
                 break; 
   
             case '/': 
-                inStack.push(val2 / val1); 
+                newStack.push(val2 / val1);
                 break; 
   
             case 'x': 
-                inStack.push(val2 * val1); 
+                /* num = val2*val1;
+                if (!isNaN(parseFloat(num))){
+                    num = toString(num.toFixed(2));
+                    console.log(num);
+                    
+                } */
+                newStack.push(val2*val1); 
                 break; 
+            
             } 
         } 
     } 
-    return inStack.pop(); 
+
+    var ans = newStack.pop();
+    inQ.enqueue(ans);
+    console.log(inQ.printQueue());
+    display(ans); 
 } 
-function convertToPostfix (exp) {
-   var pFixString = "";
+
+
+function convertToPostfix () {
    var opStack = new Stack();
 
    var precedence = function(op){
@@ -159,14 +202,15 @@ function convertToPostfix (exp) {
 
     }
 
-    for (var i = 0; i < exp.length; i++){  
-        var c = exp.charAt(i);
+    while (!inQ.isEmpty()){  
+        var c = inQ.dequeue();
+        
         if (!isNaN(parseInt(c))) {
-            pFixString += c;
+            postQ.enqueue(c);
         }
         else {
             while (!opStack.isEmpty() && (precedence(c) <= precedence(opStack.peek()))) {
-                pFixString += opStack.pop();    
+                postQ.enqueue(opStack.pop());    
             }
                 opStack.push(c);       
         }
@@ -175,7 +219,7 @@ function convertToPostfix (exp) {
             pFixString += opStack.pop(); 
         } */
      while(!opStack.isEmpty()){
-        pFixString += opStack.pop();
+        postQ.enqueue(opStack.pop());
     } 
-    return pFixString;
-};
+    
+}
